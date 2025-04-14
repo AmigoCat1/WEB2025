@@ -40,12 +40,11 @@ export class BookService {
     return { message: 'Book retrieved successfully', book };
   }
 
+
   async update(id: string, dto: BookDTO) {
-    const bookResult = await this.findOne(id);
-
-    const book = Object.assign(bookResult.book, dto);
-    const saved = await this.bookRepository.save(book);
-
-    return { message: 'Book updated successfully', book: saved };
+    const result = await this.findOne(id);
+    const $result = { ...result.book, ...dto };
+    
+    return { message: 'Book updated successfully', book: await this.bookRepository.save($result) };
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable, Logger, Inject, HttpException } from '@nestjs/common';
+import { Injectable, Inject, HttpException } from '@nestjs/common';
 import { UserDTO } from './dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { timeout, catchError, throwError, firstValueFrom } from 'rxjs';

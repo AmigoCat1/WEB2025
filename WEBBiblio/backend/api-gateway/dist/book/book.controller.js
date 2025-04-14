@@ -47,6 +47,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BookController.prototype, "create", null);
 __decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),

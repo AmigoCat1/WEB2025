@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { BookModule } from './book/book.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -20,7 +18,5 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     inject: [ConfigService]
   }),],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { BookService } from './book.service';
 import { BookDTO } from './dto';
@@ -9,7 +9,7 @@ export class BookController {
 
   @MessagePattern('create')
   create(book: BookDTO) {
-    return this.bookService.create(book);
+    return this.bookService.create(dto);
   }
 
   @MessagePattern('findAll')
@@ -23,7 +23,7 @@ export class BookController {
   }
 
   @MessagePattern('update')
-  update(@Payload('id') id: string, @Payload('book') book: BookDTO) {
-    return this.bookService.update(id, book);
+  update(@Payload('id') id: string, dto: BookDTO) {
+    return this.bookService.update(id, dto);
   }
 }
