@@ -8,7 +8,7 @@ export class BookController {
   constructor(private readonly bookService: BookService) {}
 
   @MessagePattern('create')
-  create(book: BookDTO) {
+  create(dto: BookDTO) {
     return this.bookService.create(dto);
   }
 

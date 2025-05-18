@@ -21,7 +21,7 @@ export class ReadingProgressService {
 
     const progress = this.readingProgressRepository.create(dto);
     await this.readingProgressRepository.save(progress);
-    return { message: 'Operation completed successfully', progress };
+    return { message: 'Operation completed successfull', progress };
   }
 
   async findOne(id: string) {
@@ -35,13 +35,13 @@ export class ReadingProgressService {
       throw new RpcException({ statusCode: 404, message: 'Not found' });
     }
 
-    return { message: 'Operation completed successfully', progress };
+    return { message: 'Operation completed successfull', progress };
   }
 
   async update(id: string, dto: ReadingProgressDTO) {
     const result = await this.findOne(id);
     const $result = { ...result.progress, ...dto };
 
-    return { message: 'Operation completed successfully', readingProgress: await this.readingProgressRepository.save($result) };
+    return { message: 'Operation completed successfull', readingProgress: await this.readingProgressRepository.save($result) };
   }
 }

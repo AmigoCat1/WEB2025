@@ -5,7 +5,7 @@ import { AuthGuard } from 'src/guards/auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { Roles } from 'src/common/roles.decorator';
 
-@Controller('books')
+@Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
   
@@ -16,12 +16,10 @@ export class BookController {
     return this.bookService.create(dto);
   }
 
-  @UseGuards(AuthGuard)
   @Get()
   async findAll() {
     return this.bookService.findAll();
   }
-
 
   @UseGuards(AuthGuard)
   @Get(':id')

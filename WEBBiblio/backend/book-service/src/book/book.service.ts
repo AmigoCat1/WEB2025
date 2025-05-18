@@ -28,7 +28,7 @@ export class BookService {
 
   async findOne(id: string) {
     if (!isUUID(id)) {
-      throw new RpcException({ statusCode: 404, message:'Book not found' })
+      throw new RpcException({ statusCode: 400, message:'Invalid request' })
     }
 
     const book = await this.bookRepository.findOne({ where: { id } });

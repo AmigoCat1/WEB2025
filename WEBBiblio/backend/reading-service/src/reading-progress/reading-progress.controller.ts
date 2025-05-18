@@ -10,7 +10,7 @@ export class ReadingProgressController {
   @MessagePattern('create')
   async create(@Payload() dto: ReadingProgressDTO) {
     const result = await this.readingProgressService.create(dto);
-    console.log('Returning response:', result); // 🛠 Логируем перед return
+    console.log('Returning response:', result);
     return result;
   }
 
