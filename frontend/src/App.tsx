@@ -11,7 +11,7 @@ function App() {
       <Router>
         <div className="container mx-auto px-4 py-8">
           <Link to="/" className="text-3xl font-bold mb-8 hover:text-blue-600 transition-colors block">
-            Digital Libra Library
+            Online Library
           </Link>
           <Routes>
             <Route path="/" element={<BookList />} />

@@ -93,7 +93,7 @@ const BookList = () => {
   }
 
   if (error) {
-    return <div className="text-center py-4 text-red-500">Помилка завантаження книг. Перевірте, що бекенд запущений на даний момент.</div>;
+    return <div className="text-center py-4 text-red-500">Помилка завантаження книг. Бекенд не запущений на даний момент.</div>;
   }
 
   return (
