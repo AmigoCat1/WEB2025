@@ -3,7 +3,7 @@ import { BookDTO } from './dto';
 export declare class BookController {
     private readonly bookService;
     constructor(bookService: BookService);
-    create(book: BookDTO): Promise<{
+    create(dto: BookDTO): Promise<{
         message: string;
         book: import("./entities/book.entity").Book;
     }>;
@@ -15,8 +15,18 @@ export declare class BookController {
         message: string;
         book: import("./entities/book.entity").Book;
     }>;
-    update(id: string, book: BookDTO): Promise<{
+    update(id: string, dto: BookDTO): Promise<{
         message: string;
-        book: import("./entities/book.entity").Book & BookDTO;
+        book: {
+            title: string;
+            author: string;
+            genre: string;
+            description: string;
+            publication_year: number;
+            file_url: string;
+            cover_url: string;
+            id: string;
+            created_at: Date;
+        } & import("./entities/book.entity").Book;
     }>;
 }

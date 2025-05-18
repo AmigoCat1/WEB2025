@@ -21,8 +21,8 @@ let BookController = class BookController {
     constructor(bookService) {
         this.bookService = bookService;
     }
-    create(book) {
-        return this.bookService.create(book);
+    create(dto) {
+        return this.bookService.create(dto);
     }
     findAll() {
         return this.bookService.findAll();
@@ -30,8 +30,8 @@ let BookController = class BookController {
     findOne(id) {
         return this.bookService.findOne(id);
     }
-    update(id, book) {
-        return this.bookService.update(id, book);
+    update(id, dto) {
+        return this.bookService.update(id, dto);
     }
 };
 exports.BookController = BookController;
@@ -57,7 +57,6 @@ __decorate([
 __decorate([
     (0, microservices_1.MessagePattern)('update'),
     __param(0, (0, microservices_1.Payload)('id')),
-    __param(1, (0, microservices_1.Payload)('book')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)

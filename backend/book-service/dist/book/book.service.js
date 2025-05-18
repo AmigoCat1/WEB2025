@@ -35,7 +35,7 @@ let BookService = class BookService {
     }
     async findOne(id) {
         if (!(0, uuid_1.validate)(id)) {
-            throw new microservices_1.RpcException({ statusCode: 404, message: 'Book not found' });
+            throw new microservices_1.RpcException({ statusCode: 400, message: 'Invalid request' });
         }
         const book = await this.bookRepository.findOne({ where: { id } });
         if (!book) {
@@ -44,10 +44,9 @@ let BookService = class BookService {
         return { message: 'Book retrieved successfully', book };
     }
     async update(id, dto) {
-        const bookResult = await this.findOne(id);
-        const book = Object.assign(bookResult.book, dto);
-        const saved = await this.bookRepository.save(book);
-        return { message: 'Book updated successfully', book: saved };
+        const result = await this.findOne(id);
+        const $result = { ...result.book, ...dto };
+        return { message: 'Book updated successfully', book: await this.bookRepository.save($result) };
     }
 };
 exports.BookService = BookService;

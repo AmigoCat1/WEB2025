@@ -18,6 +18,16 @@ export declare class BookService {
     }>;
     update(id: string, dto: BookDTO): Promise<{
         message: string;
-        book: Book & BookDTO;
+        book: {
+            title: string;
+            author: string;
+            genre: string;
+            description: string;
+            publication_year: number;
+            file_url: string;
+            cover_url: string;
+            id: string;
+            created_at: Date;
+        } & Book;
     }>;
 }

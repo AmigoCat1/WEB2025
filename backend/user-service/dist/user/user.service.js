@@ -30,41 +30,39 @@ let UserService = class UserService {
     }
     async create(dto) {
         const userPassword = await bcrypt.hash(dto.password, this.saltRounds);
-        const existingEmail = await this.findByEmail(dto.email);
-        const existingUsername = await this.findByName(dto.username);
-        if (existingEmail || existingUsername) {
-            throw new microservices_1.RpcException({ statusCode: 400, message: 'User already exists' });
+        const existingUser = await this.userRepository.findOne({
+            where: [{ email: dto.email }, { username: dto.username }],
+        });
+        if (existingUser) {
+            throw new microservices_1.RpcException({ statusCode: 400, message: 'Unable request' });
         }
         const $user = this.userRepository.create({
             ...dto,
             password: userPassword,
         });
         const user = await this.userRepository.save($user);
-        return this.authService.generateTokens({
+        const tokens = await this.authService.generateTokens({
             member_id: user.id,
             role_id: user.role
         });
+        return {
+            id: user.id,
+            jwt: tokens,
+        };
     }
     async login(dto) {
-        let user = await this.findByEmail(dto.email);
-        if (!user) {
+        const user = await this.userRepository.findOne({ where: { email: dto.email } });
+        if (!user || !(await bcrypt.compare(dto.password, user.password))) {
             throw new microservices_1.RpcException({ statusCode: 401, message: 'Invalid credentials.' });
         }
-        let isPasswordValid = await bcrypt.compare(dto.password, user.password);
-        ;
-        if (!isPasswordValid) {
-            throw new microservices_1.RpcException({ statusCode: 401, message: 'Invalid credentials.' });
-        }
-        return this.authService.generateTokens({
+        const tokens = await this.authService.generateTokens({
             member_id: user.id,
             role_id: user.role
         });
-    }
-    async findByName(username) {
-        return this.userRepository.findOne({ where: { username } });
-    }
-    async findByEmail(email) {
-        return this.userRepository.findOne({ where: { email } });
+        return {
+            id: user.id,
+            jwt: tokens,
+        };
     }
 };
 exports.UserService = UserService;
